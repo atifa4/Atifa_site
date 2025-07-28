@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Atifa Data Enthusiast - Projects & Blogs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>Atifa Data Enthusiast - Projects & Blogs</h1>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Resume.html">Resume</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="About_Me.html">About_Me</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="auth-links">
+        <a href="#" id="loginLink">Login</a>
+        <a href="#" id="registerLink">Register</a>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <h2>Welcome to my personal space on the web!</h2>
+
+        <p>
+          <em>
+            Hi, I'm Atifa — I am a Computer Science student interested in software development and cybersecurity. I have basic  hands-on experience in programming languages.          I enjoy solving problems and learning new technologies. 
+            I’m looking forward to applying my skills and knowledge to contribute to real-world projects..</em
+          >
+
+          Explore my projects and blogs where I share insights on technology,
+          science, and the ideas that inspire me
+        </p>
+        <button id="quoteButton">Quotes</button>
+        <div id="quoteImage" class="hidden">
+          <img
+            src="Screenshot 2025-05-06 014736.png"
+            alt="Leonardo da Vinci quotes"
+            width="450"
+            height="400"
+          />
+
+          <img src="quote_2.jpg" alt="edison quotes" width="460" height="400" />
+
+          <img src="quote3.jpg" alt="edion quotes" width="530" height="400" />
+        </div>
+      </section>
+    </main>
+
+    <div id="registerModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" id="closeRegister">&times;</span>
+        <h2>Register</h2>
+        <form id="registerForm">
+          <label for="username">Username:</label>
+          <input type="text" id="username" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" required />
+
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" required />
+
+          <label for="password">Password:</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" required />
+            <span id="togglePassword" class="toggle-eye">👁️</span>
+          </div>
+
+          <label for="confirmPassword">Confirm Password:</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirmPassword" required />
+            <span id="toggleConfirmPassword" class="toggle-eye">👁️</span>
+          </div>
+
+          <button type="button" id="sendCode" disabled>Send Code</button>
+        </form>
+      </div>
+    </div>
+    <footer>@2025 Atifa. All rights reserved.</footer>
+
+    <script>
+      const quoteButton = document.getElementById("quoteButton");
+      const quoteImg = document.getElementById("quoteImage");
+
+      quoteButton.addEventListener("click", function () {
+        quoteImg.classList.toggle("hidden");
+      });
+
+      const registerLink = document.getElementById("registerLink");
+      const registerModal = document.getElementById("registerModal");
+      const closeRegister = document.getElementById("closeRegister");
+      const sendCodeBtn = document.getElementById("sendCode");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const passwordInput = document.getElementById("password");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+
+      registerLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        registerModal.classList.remove("hidden");
+      });
+
+      closeRegister.addEventListener("click", function () {
+        registerModal.classList.add("hidden");
+      });
+
+      emailInput.addEventListener("input", toggleSendCode);
+      phoneInput.addEventListener("input", toggleSendCode);
+
+      function isValidPassword(password) {
+        const regex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d!@#$%^&*]{5,}$/;
+        return regex.test(password);
+      }
+
+      sendCodeBtn.addEventListener("click", function () {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (!isValidPassword(password)) {
+          alert(
+            "Password must be atleast 5 characters long, include: \n - Uppercase letter\n - Lowercase letter\n - Number\n - Speacial Character"
+          );
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match");
+          return;
+        }
+        alert("Code sent successfully (mock action).");
+      });
+
+      function toggleSendCode() {
+        sendCodeBtn.disabled = !(emailInput.value && phoneInput.value);
+      }
+
+      document
+        .getElementById("togglePassword")
+        .addEventListener("click", function () {
+          const passwordInput = document.getElementById("password");
+          const type = passwordInput.type === "password" ? "text" : "password";
+          passwordInput.type = type;
+          this.textContent = type === "password" ? "👁️" : "🙈";
+        });
+
+      document
+        .getElementById("toggleConfirmPassword")
+        .addEventListener("click", function () {
+          const confirmInput = document.getElementById("confirmPassword");
+          const type = confirmInput.type === "password" ? "text" : "password";
+          confirmInput.type = type;
+          this.textContent = type === "password" ? "👁️" : "🙈";
+        });
+    </script>
+  </body>
+</html>
